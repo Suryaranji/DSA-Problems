@@ -1,0 +1,20 @@
+1)Basics 
+2)Array
+3)Time and Space Complexity
+4)matrix
+5)Recursion(simple)
+6)BinarySearch
+7)sorting
+8)LinkedList
+9)stack
+10)queue
+11)Sliding_window
+12)trees
+13)Bactracking and recursion Advanced
+14)Graphs
+15)greedy
+16)Dynamic Programming
+17)Heaps
+18)Trie
+19)String
+20)Extra
