@@ -1,0 +1,66 @@
+ Shortcuts in Bit Manipulation (Useful Tricks)
+Here are some classic bit hacks that help in these problems:
+
+1.Check if number is power of 2
+
+         (n & (n - 1)) == 0
+         1000
+         0111 -> 0
+         how to arrive at this in bit manipulation a number which is power of 2 has only one set bit
+            so if we subtract 1 from it all the bits after that set bit will become
+            0 and that set bit will become 0 and all the bits after that will become 1
+→ True if n has only one set bit.
+
+2 Remove rightmost 1
+
+            // n = n & (n - 1)
+            //how this works
+            // 12 = 1100
+            // 11 = 1011
+            // 1100
+            // 1011
+            // ----
+            // 1000 -> 8
+            // → Clears the lowest set bit.
+            // Useful for counting bits (Brian Kernighan’s algo).
+
+
+            // → Useful for counting bits (Brian Kernighan’s algo).
+
+3.Get rightmost 1 only
+
+            // n & -n
+            //how this works
+            // 12 = 1100
+            // -12 = 0100 (two's complement)
+            // 1100
+            // 0100
+            // ----
+            // 0100 -> 4
+
+
+
+            // → Leaves only the lowest set bit.
+            // Example: 12 (1100₂) → n & -n = 0100.
+
+            // Flip all bits
+
+            // ~n
+
+
+            // → Bitwise NOT.
+
+            // Set/clear/toggle a bit at position k
+
+            // n | (1 << k)   // set kth bit
+            // n & ~(1 << k)  // clear kth bit
+            // n ^ (1 << k)   // toggle kth bit
+
+
+            // Count set bits quickly (Brian Kernighan)
+
+            // while (n > 0) {
+            //     n &= (n - 1);
+            //     count++;
+            // }
+            return ans;
