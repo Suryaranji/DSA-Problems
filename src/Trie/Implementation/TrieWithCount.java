@@ -1,14 +1,18 @@
 package Trie.Implementation;
 
 
-class Node
+class CountNode
 {
     CountNode links[];
     boolean flag;
-    Node ()
+    int exactCount;
+    int prefixCount;
+    CountNode()
     {
         flag=false;
         links=new CountNode[26];
+        exactCount=0;
+        prefixCount=1;
     }
     boolean containsKey(char c)
     {
@@ -25,10 +29,12 @@ class Node
     void setEnd()
     {
         flag=true;
+        exactCount++;
     }
 
+
 }
-public class Trie {
+public class TrieWithCount {
     public CountNode root=new CountNode();
     public void insert(String s)
     {
@@ -39,6 +45,8 @@ public class Trie {
             if(!temp.containsKey(c))
             {
                 temp.put(c,new CountNode());
+            }else{
+                temp.get(c).prefixCount++;
             }
             temp=temp.get(c);
         }
@@ -66,6 +74,42 @@ public class Trie {
         }
         return true;
     }
+    public int countWordsEqualTo(String s)
+    {
+        CountNode temp=root;
+        for(int i=0;i<s.length();i++)
+        {
+            char c=s.charAt(i);
+            if(!temp.containsKey(c))return 0;
+            temp=temp.get(c);
+        }
+        return temp.exactCount;
+    }
+    public int countWordsStartingWith(String s){
+        CountNode temp=root;
+        for(int i=0;i<s.length();i++)
+        {
+            char c=s.charAt(i);
+            if(!temp.containsKey(c))return 0;
+            temp=temp.get(c);
+        }
+        return temp.prefixCount;
+    }
+    public int erase(String s)
+    {
+        if(!isExist(s))return 0;
+        CountNode temp=root;
+        for(int i=0;i<s.length();i++)
+        {
+            char c=s.charAt(i);
+            if(!temp.containsKey(c))return 0;
+            temp=temp.get(c);
+            temp.prefixCount--;
+        }
+        temp.exactCount--;
+        if(temp.exactCount==0)temp.flag=false;
+        return 1;
+    }
 
     public static void main(String[] args) {
         TrieWithCount obj=new TrieWithCount();
@@ -75,6 +119,13 @@ public class Trie {
         System.out.println(obj.startsWith("app"));
         obj.insert("app");
         System.out.println(obj.isExist("app"));
+        obj.insert("apple");
+        System.out.println(obj.countWordsEqualTo("apple"));
+        obj.insert("apple");
+        System.out.println(obj.countWordsStartingWith("app"));
+
+        obj.erase("apple");
+        System.out.println(obj.countWordsEqualTo("apple"));
     }
 
 }
